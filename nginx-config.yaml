@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  nginx.conf: |-
+    events {}
+    http{
+        server {
+            listen 80;
+            root /var/www/html;
+
+            location = /google {
+                alias /var/www/html/google.html;
+            }
+            location = /fb {
+                alias /var/www/html/fb.html;
+            }
+        }
+    }

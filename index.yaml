@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: index-config
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Name }}-index
+    app.kubernetes.io/managed-by: {{ .Release.Service }}-index
+data:
+  index.html: |-
+    This is the Home Page

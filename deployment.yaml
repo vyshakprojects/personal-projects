@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nginx-app.fullname" . }}
+  labels:
+    {{- include "nginx-app.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "nginx-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "nginx-app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag}}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+          - name: nginx-config
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
+          - name: google-config
+            mountPath: /var/www/html/google.html
+            subPath: google.html
+          - name: fb-config
+            mountPath: /var/www/html/fb.html
+            subPath: fb.html
+          - name: index-config
+            mountPath: /var/www/html/index.html
+            subPath: index.html
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+        - name: google-config
+          configMap:
+            name: google-config
+        - name: fb-config
+          configMap:
+            name: fb-config
+        - name: index-config
+          configMap:
+            name: index-config

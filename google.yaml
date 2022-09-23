@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: google-config
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Name }}-google
+    app.kubernetes.io/managed-by: {{ .Release.Service }}-google
+data:
+  google.html: |-
+    Hi this is google

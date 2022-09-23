@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fb-config
+  labels:
+    app.kubernetes.io/instance: {{ .Release.Name }}-fb
+    app.kubernetes.io/managed-by: {{ .Release.Service }}-fb
+data:
+  fb.html: |-
+    Hi this is fb
