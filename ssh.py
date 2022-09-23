@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import paramiko
 
 def sshClient(host, port, user, password, command):
