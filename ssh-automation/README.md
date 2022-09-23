@@ -14,6 +14,10 @@ mkdir 1 2
 ```
 docker compose up
 ```
+- install dependencies for ssh.
+```
+pip3 install paramiko
+```
 - run ssh.py
 ```
 python3 ssh.py
