@@ -21,4 +21,4 @@ while True:
         password = server["pass"]
         host = server["host"]
         port = server["port"]
-        sshClient2(host, port, user, password, cmd)
+        sshClient(host, port, user, password, cmd)
